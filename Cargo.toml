@@ -1,0 +1,13 @@
+[package]
+name = "tx-decoder"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dotenv = "0.15.0"
+hex = "0.4.3"
+
+[features]
+default = ["std"]
+std = ["alloc"]
+alloc = []
