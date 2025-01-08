@@ -1,7 +1,8 @@
 use crate::txx::{
     inputs,
     inputs::{Input, InputsLength, ReadCompactSizeError, ReadInputsError},
-    version, ReadVersionError,
+    version,
+    version::ReadVersionError,
 };
 
 pub type TransactionData = Vec<u8>;
