@@ -1,6 +1,6 @@
 use crate::txx::{
     inputs,
-    inputs::{InputsLength, ReadInputsLengthError},
+    inputs::{Input, InputsLength, ReadCompactSizeError, ReadInputsError},
     version, ReadVersionError,
 };
 
@@ -8,16 +8,21 @@ pub type TransactionData = Vec<u8>;
 
 #[allow(dead_code)]
 pub trait TransactionBytesTrait {
-    fn length(&self) -> Result<InputsLength, ReadInputsLengthError>;
     fn version(&self) -> Result<u32, ReadVersionError>;
+    fn length(&self) -> Result<InputsLength, ReadCompactSizeError>;
+    fn inputs(&self) -> Result<Vec<Input>, ReadInputsError>;
 }
 
 impl TransactionBytesTrait for TransactionData {
-    fn length(&self) -> Result<InputsLength, ReadInputsLengthError> {
+    fn version(&self) -> Result<u32, ReadVersionError> {
+        version::from(self)
+    }
+
+    fn length(&self) -> Result<InputsLength, ReadCompactSizeError> {
         inputs::length(self)
     }
 
-    fn version(&self) -> Result<u32, ReadVersionError> {
-        version::from(self)
+    fn inputs(&self) -> Result<Vec<Input>, ReadInputsError> {
+        inputs::from(self)
     }
 }
