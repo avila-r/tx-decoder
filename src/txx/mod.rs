@@ -1,9 +1,8 @@
-mod bytes;
-mod errors;
-mod hex;
-mod inputs;
-mod version;
+pub mod bytes;
+pub mod errors;
+pub mod hex;
+pub mod inputs;
+pub mod version;
 
-pub use bytes::*;
-pub use hex::*;
-pub use version::*;
+mod transaction;
+pub use transaction::*;
